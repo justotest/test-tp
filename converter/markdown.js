@@ -8,10 +8,20 @@
    return str;
  }
 
+var parseCode = function(str) {
+  var codeRegExp = /```(.*?)```/;
+  var stra = [];
+  while ((stra = codeRegExp.exec(str)) !== null) {
+    str = str.replace(stra[0], '<code>' + stra[1] + '</code>');
+  }
+  return str;
+ }
+
 var markdown = {
   parse: function (str, strict) {
     'use strict';
     str = parseHeadline(str);
+    str = parseCode(str);
     return str;
   }
 };
